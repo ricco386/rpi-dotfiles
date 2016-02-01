@@ -1,0 +1,20 @@
+[user]
+	email = richard@kellnerovci.sk
+	name = Richard Kellner
+[core]
+	editor = vim
+[color]
+    ui = auto
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
+#[push]
+#    default = simple
+[alias]
+    log2 = "log --graph --decorate --pretty=oneline --abbrev-commit" 
+	up = "!git remote update -p; git merge --ff-only @{u}"
+[branch]
+	autosetupmerge = true
+[push]
+	default = simple
