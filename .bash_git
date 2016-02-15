@@ -37,9 +37,13 @@ BOLD_BLUE="01;34m"
 BOLD_MAGENTA="01;35m"
 BOLD_CYAN="01;36m"
 
+if [ -z "$HOST_BASH_COLOR" ]; then 
+	HOST_BASH_COLOR="01;33m"
+fi
+
 if [[ `whoami` == "root" ]]; then
     export PS1='\[\033[01;31m\]\u@\h\[\033[01;34m\]:\w \$\[\033[00m\] '
 else
     # export PS1='\[\033[01;36m\]\u@\h\[\033[01;34m\]:\w \$\[\033[00m\] '
-    export PS1='\[\033[01;33m\]\u@\h\[\033[01;34m\]:\w \[\033[$BOLD_MAGENTA\]$(parse_git_branch)\[\033[00m\]\[\033[$BOLD_RED\]$(git_unadded_new)\[\033[00m\]\[\033[$BOLD_GREEN\]$(git_needs_commit)\[\033[00m\]\[\033[$BOLD_YELLOW\]$(git_modified_files)\[\033[01;34m\]\$\[\033[00m\] '
+    export PS1='\[\033[$HOST_BASH_COLOR\]\u@\h\[\033[01;34m\]:\w \[\033[$BOLD_MAGENTA\]$(parse_git_branch)\[\033[00m\]\[\033[$BOLD_RED\]$(git_unadded_new)\[\033[00m\]\[\033[$BOLD_GREEN\]$(git_needs_commit)\[\033[00m\]\[\033[$BOLD_YELLOW\]$(git_modified_files)\[\033[01;34m\]\$\[\033[00m\] '
 fi
