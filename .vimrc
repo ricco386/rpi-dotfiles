@@ -99,7 +99,7 @@ set tabstop=4
 set softtabstop=4
 
 " convert all tabs to space
-"set expandtab
+set expandtab
 
 " indent/outdent by four columns
 set shiftwidth=4
@@ -139,14 +139,14 @@ au BufRead,BufNewFile *.html,*.htm,*.css,*.js set expandtab
 
 " Number of spaces that a pre-existing tab is equal to.
 " For the amount of space used for a new tab use shiftwidth.
-au BufRead,BufNewFile *py,*pyw,*.c,*.h,*.java set tabstop=4
+au BufRead,BufNewFile *py,*pyw,*.c,*.h,*.java,*.xml set tabstop=4
 
 " What to use for an indent.
 " This will affect Ctrl-T and 'autoindent'.
 " Python: 4 spaces
 " C: tabs (pre-existing files) or 4 spaces (new files)
-au BufRead,BufNewFile *.py,*pyw,*.java  set shiftwidth=4
-au BufRead,BufNewFile *.py,*.pyw,*.java set expandtab
+au BufRead,BufNewFile *.py,*pyw,*.java,*.xml set shiftwidth=4
+au BufRead,BufNewFile *.py,*.pyw,*.java,*.xml set expandtab
 fu Select_c_style()
     if search('^\t', 'n', 150)
         set shiftwidth=8
@@ -163,14 +163,14 @@ au BufRead,BufNewFile Makefile* set noexpandtab
 highlight BadWhitespace ctermbg=red guibg=red
 
 " Display tabs at the beginning of a line in Python mode as bad.
-au BufRead,BufNewFile *.py,*.pyw,*.java match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.py,*.pyw,*.java,*.xml match BadWhitespace /^\t\+/
 " Make trailing whitespace be flagged as bad.
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.java match BadWhitespace /\s\+$/
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.java,*.xml match BadWhitespace /\s\+$/
 
 " Wrap text after a certain number of characters
 " Python: 79 
 " C: 79
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h set textwidth=79
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h set textwidth=120
 
 " Turn off settings in 'formatoptions' relating to comment formatting.
 " - c : do not automatically insert the comment leader when wrapping based on
