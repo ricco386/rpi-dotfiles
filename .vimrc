@@ -168,8 +168,8 @@ au BufRead,BufNewFile *.py,*.pyw,*.java,*.xml match BadWhitespace /^\t\+/
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.java,*.xml match BadWhitespace /\s\+$/
 
 " Wrap text after a certain number of characters
-" Python: 79 
-" C: 79
+" Python: 120 
+" C: 120
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h set textwidth=120
 
 " Turn off settings in 'formatoptions' relating to comment formatting.
@@ -216,8 +216,9 @@ map <leader>td <Plug>TaskList
 "
 map <leader>g :GundoToggle<CR>
 
-let g:pyflakes_use_quickfix = 0
-let g:pep8_map='<leader>8'
+" pip install flake8 and install submodule vim-flake8 to make PEP8 autocheck
+" press F7 to see the PEP8 validation
+" autocmd BufWritePost *.py call Flake8()
 
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
