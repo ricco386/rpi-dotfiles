@@ -1,0 +1,46 @@
+#!/bin/bash
+
+if [ "$(whoami)" != 'root' ]; then
+    echo "Run $0 as root user!"
+    exit 1;
+fi
+
+printf "Update system\n"
+apt-get update
+apt-get upgrade -y
+
+printf "\n\nInstall apps\n"
+apt-get install -y git screen vim python-pip python-virtualenv rpi-update fortune
+
+while true; do
+    printf "\n\nDo you wish to install python3? (y/N)\n"
+    read yn
+    case $yn in
+        [Yy]* )
+            apt-get install -y python3 python3-pip
+            break;;
+        [Nn]* )
+            break;;
+        * ) printf "\nPlease answer yes or no.\n";;
+    esac
+done
+
+pi=$(id -nu 1000)
+
+while true; do
+    printf "\n\nDo you wish to rename default user ($pi)? (y/N)\n"
+    read yn
+    case $yn in
+        [Yy]* )
+            printf "\nWhat would be the new username?\n"
+            read newuser
+            usermod -l $newuser $pi
+            break;;
+        [Nn]* )
+            break;;
+        * ) printf "\nPlease answer yes or no.\n";;
+    esac
+done
+
+rpi-update
+reboot
