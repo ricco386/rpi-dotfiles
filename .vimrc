@@ -202,8 +202,8 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" https://powerline.readthedocs.io/en/latest/
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+" https://github.com/vim-airline/vim-airline
+Plugin 'vim-airline/vim-airline'
 Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdtree'
@@ -211,6 +211,35 @@ Plugin 'scrooloose/nerdtree'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+" ----------------------------------------------------------------------------
+" vim-airline configuration
+
+" Do not show vim mode (insert, normal, etc...) airline will takes care of it
+set noshowmode
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+" unicode symbols, uncomment if airline fonts are broken (nice fallback 
+" if powerline_fonts are not installed: https://github.com/powerline/fonts)
+
+"if !exists('g:airline_symbols')
+"    let g:airline_symbols = {}
+"endif
+"
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.linenr = '␊'
+" let g:airline_symbols.linenr = '␤'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.whitespace = 'Ξ'
 
 " ----------------------------------------------------------------------------
 " Key Mapping
