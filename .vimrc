@@ -58,7 +58,7 @@ set laststatus=2
 
 " Set status line
 "set statusline=%1*%F%m%r%h%w%=%(%c%V\ %l/%L\ %P%)
-set statusline=%1*%F%m%r%h%w\ [%{&ff}]%=%(%c%V\ %l/%L\ %P%)
+"set statusline=%1*%F%m%r%h%w\ [%{&ff}]%=%(%c%V\ %l/%L\ %P%)
 
 " Keep a .viminfo file.
 set viminfo='20,\"500
@@ -74,7 +74,7 @@ set suffixes+=.info,.aux,.log,.dvi,.bbl,.out,.o,.lo,.pyc
 " This section is for programming in general doesnt matter what kind of 
 " language, because this is useful in all of them and is not harming standards
 
-" For full syntax highlighting:
+" For full syntax highlighting by vim-flake8 plugin:
 let python_highlight_all=1
 syntax on
 
@@ -114,11 +114,11 @@ set shiftround
 " ----------------------------------------------------------------------------
 " HTML, CSS, Javascript file standards
 
-" Number of spaces that tab is equal to.
-au BufRead,BufNewFile *.html,*.htm,*.css,*.js set tabstop=2
-au BufRead,BufNewFile *.html,*.htm,*.css,*.js set shiftwidth=2
-" replace <TAB> with spaces
-au BufRead,BufNewFile *.html,*.htm,*.css,*.js set expandtab
+au BufNewFile,BufRead *.js, *.html, *.htm, *.css
+    \ set tabstop=2  " Number of spaces that tab is equal to.
+    \ set softtabstop=2
+    \ set shiftwidth=2
+    \ set expandtab  " replace <TAB> with spaces
 
 " ----------------------------------------------------------------------------
 " Coding standards specified in PEP 7 & 8.
@@ -168,9 +168,9 @@ au BufRead,BufNewFile *.py,*.pyw,*.java,*.xml match BadWhitespace /^\t\+/
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.java,*.xml match BadWhitespace /\s\+$/
 
 " Wrap text after a certain number of characters
-" Python: 120 
-" C: 120
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h set textwidth=120
+" Python: 119
+" C: 119
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h set textwidth=119
 
 " Turn off settings in 'formatoptions' relating to comment formatting.
 " - c : do not automatically insert the comment leader when wrapping based on
@@ -191,62 +191,37 @@ au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 " ----------------------------------------------------------------------------
 " Plugins
 "
-" run pathogen (more in https://github.com/tpope/vim-pathogen)
-filetype off
-execute pathogen#infect()
-call pathogen#helptags()
+" Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-"call pathogen#infect()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" Enable filetype detection
-filetype on
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-" Enable filetype-specific plugins
-filetype plugin on
+" https://powerline.readthedocs.io/en/latest/
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
+Plugin 'scrooloose/nerdtree'
 
-" vim-gitgutter The colours in the sign column are weird.
-highlight clear SignColumn
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
 " ----------------------------------------------------------------------------
-" Plugins Mapping
+" Key Mapping
 "
-" Fix Tasklist mapping so it is not in conflict with other plugins
-map <leader>td <Plug>TaskList
-
-" Need to comment better!!!!!!
+" Split navigations, key combos:
+"  * Ctrl-j move to the split below
+"  * Ctrl-k move to the split above
+"  * Ctrl-l move to the split to the right
+"  * Ctrl-h move to the split to the left
 "
-map <leader>g :GundoToggle<CR>
-
-" pip install flake8 and install submodule vim-flake8 to make PEP8 autocheck
-" press F7 to see the PEP8 validation
-" autocmd BufWritePost *.py call Flake8()
-
-au FileType python set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
-
-set completeopt=menuone,longest,preview
-
-map <leader>n :NERDTreeToggle<CR>
-
-map <leader>j :RopeGotoDefinition<CR>
-map <leader>r :RopeRename<CR>
-
-nmap <leader>a <Esc>:Ack!
-
-
-" %{fugitive#statusline()}
-
-map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
-
-" Execute the tests
-nmap <silent><Leader>tf <Esc>:Pytest file<CR>
-nmap <silent><Leader>tc <Esc>:Pytest class<CR>
-nmap <silent><Leader>tm <Esc>:Pytest method<CR>
-" cycle through test errors
-nmap <silent><Leader>tn <Esc>:Pytest next<CR>
-nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
-nmap <silent><Leader>te <Esc>:Pytest error<CR>
-" Navigation between windows
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
